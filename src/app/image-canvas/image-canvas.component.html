@@ -1,0 +1,7 @@
+<!-- <input (keydown)="onKeyDown($event)"> -->
+
+<div class="container-div">
+    <div class="slide" #canvas>
+        <div class="field" [ngStyle]="{'top': Yfinal+'%', 'left': Xfinal+'%'}" [ngClass]="{'green': state=='FOCUS', 'red': state=='READY'}"></div>
+    </div>
+</div>

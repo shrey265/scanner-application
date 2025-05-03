@@ -1,0 +1,20 @@
+<div style="display: flex; justify-content: space-between; width: 80vw;">
+    <div>
+        <div>
+            <p>Move the scanner using arrow keys</p>
+            <p>Top left: x0, y0</p>
+            <p>Scanner state: {{scannerState}}</p>
+        </div>
+        <app-image-canvas (coords)="updateCoords($event)" [state]="scannerState"></app-image-canvas>
+    </div>
+    <div style="display: flex; width: 30%;">
+        <div style="margin: 5% 5% 5% 5%;">
+            <b>Shift history</b>
+            <p *ngFor="let item of shiftHistory">x{{item.x}} y{{item.y}}</p>
+        </div>
+        <div style="margin: 5% 5% 5% 5%;">
+            <b>Scan history</b>
+            <p *ngFor="let item of scanHistory">x{{item.x}} y{{item.y}}</p>
+        </div>
+    </div>
+</div>
