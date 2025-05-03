@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './scanner.component.html',
   styleUrl: './scanner.component.scss'
 })
+
 export class ScannerComponent {
   scannerState: string = 'IDLE';
   shiftTimer: number = 0;
@@ -22,6 +23,7 @@ export class ScannerComponent {
   shiftHistory: any[] = [];
   scanHistory: any[] = [];
 
+  // this function finds the total shift from the last moved coordinate to the latest keypress coordinates
   updateCoords(coords: any){
       this.totalShift = Math.abs(coords.unitX-this.lastX) + Math.abs(coords.unitY-this.lastY);
       this.finalX = coords.unitX;
@@ -30,6 +32,10 @@ export class ScannerComponent {
       this.moveScanner(coords.unitX, coords.unitY, this.shiftTimer);
   }
 
+  // this function is responsible to move the scanner
+  // once the shift is completed
+  // it looks if theres another some shift is pending
+  // otherwise it call focus image after 20ms
   moveScanner(Xcoord: number, Ycoord: number, timeout: number){
     if(this.scannerState == 'MOVING' || this.scannerState =='FOCUS') return;
 
@@ -41,13 +47,14 @@ export class ScannerComponent {
     console.log("shift in progress", timeout);
 
     const interval = setTimeout(() => {
-      console.log("finish");
       this.scannerState = 'IDLE';
       this.shiftHistory.push({'x': this.roundTo(Xcoord,2), 'y': this.roundTo(Ycoord,2)});
       if(this.shiftTimer>0){
         this.moveScanner(this.finalX, this.finalY, this.shiftTimer);
       } else{
-        this.focusImage(Xcoord, Ycoord);
+        setTimeout(() => {
+          this.focusImage(Xcoord, Ycoord);
+        }, 20); // 20ms timer
       }
 
     }, timeout*1000); 
@@ -58,7 +65,10 @@ export class ScannerComponent {
     this.scannerState = 'FOCUS';
     const interval = setTimeout(() => {
       this.scannerState = 'READY';
-      this.scanHistory.push({'x': this.roundTo(Xcoord,2), 'y': this.roundTo(Ycoord,2)})
+      this.scanHistory.push({'x': this.roundTo(Xcoord,2), 'y': this.roundTo(Ycoord,2)});
+      if(this.shiftTimer>0){
+        this.moveScanner(this.finalX, this.finalY, this.shiftTimer);
+      }
     }, 2000); 
   }
 
