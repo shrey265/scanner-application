@@ -11,15 +11,23 @@ import { CommonModule } from '@angular/common';
 })
 
 export class ScannerComponent {
+  // state
   scannerState: string = 'IDLE';
+  
+  // timer
   shiftTimer: number = 0;
   focusTimer: number = 0;
+
+  // shift
   totalShift: number = 0;
+  
+  // coords
   finalX: number = 0;
   finalY: number = 0;
   lastX: number = 0;
   lastY: number = 0;
 
+  // store history
   shiftHistory: any[] = [];
   scanHistory: any[] = [];
 
@@ -48,7 +56,7 @@ export class ScannerComponent {
 
     const interval = setTimeout(() => {
       this.scannerState = 'IDLE';
-      this.shiftHistory.push({'x': this.roundTo(Xcoord,2), 'y': this.roundTo(Ycoord,2)});
+      this.shiftHistory.push({'x': this.roundTo(Xcoord,2), 'y': this.roundTo(Ycoord,2), 'time': this.roundTo(timeout,2)});
       if(this.shiftTimer>0){
         this.moveScanner(this.finalX, this.finalY, this.shiftTimer);
       } else{

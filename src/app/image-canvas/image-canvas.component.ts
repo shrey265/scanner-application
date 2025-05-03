@@ -13,16 +13,22 @@ export class ImageCanvasComponent implements AfterViewInit, OnChanges{
   @Output('coords') coords: EventEmitter<any> = new EventEmitter();
   @Input('state') state: string = 'IDLE';
 
+  // coords updated after each keypress
   Xcoord: number = 0;
   Ycoord: number = 0;
+
+  // coordinates where box will appear
   Xfinal: number = 0;
   Yfinal: number = 0;
+
+  // slide width and field width
   slideWidth: number = 0;
   slideHeight: number = 0;
   fieldWidth: number = 50;
   unitSizeX: number = 0;
   unitSizeY:  number = 0;
 
+  // units moved in x and y directions
   unitX: number = 0;
   unitY: number = 0;
 
@@ -38,8 +44,6 @@ export class ImageCanvasComponent implements AfterViewInit, OnChanges{
     this.slideHeight = this.canvas.nativeElement.offsetHeight;
     this.unitSizeX = (this.fieldWidth*100)/this.slideWidth;
     this.unitSizeY = (this.fieldWidth*100)/this.slideHeight;
-    // console.log(this.slideHeight);
-    // console.log(this.slideWidth);
   }
 
   @HostListener('window:keydown', ['$event'])
