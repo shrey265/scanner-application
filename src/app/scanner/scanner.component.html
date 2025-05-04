@@ -3,9 +3,9 @@
         <div>
             <p>Move the scanner using arrow keys</p>
             <p>Top left: x0, y0</p>
-            <p>Scanner state: {{scannerState}}</p>
+            <p>Scanner state: {{scannerState}} &nbsp;&nbsp; <button (click)="clearState()">Reset</button></p>
         </div>
-        <app-image-canvas (coords)="updateCoords($event)" [state]="scannerState"></app-image-canvas>
+        <app-image-canvas [shiftHistory]="shiftHistory" [scanHistory]="scanHistory" (coords)="updateCoords($event)" [state]="scannerState"></app-image-canvas>
     </div>
     <div class="history-container">
         <div class="m5">

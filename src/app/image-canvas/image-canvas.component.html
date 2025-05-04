@@ -1,7 +1,7 @@
-<!-- <input (keydown)="onKeyDown($event)"> -->
-
 <div class="container-div">
     <div class="slide" #canvas>
-        <div class="field" [ngStyle]="{'top': Yfinal+'%', 'left': Xfinal+'%'}" [ngClass]="{'green': state=='FOCUS', 'red': state=='READY'}"></div>
+        <div class="field" *ngIf="state!='MOVING' && state!='FOCUS'" [ngStyle]="{'top': finalCoords.y+'%', 'left': finalCoords.x+'%'}" [ngClass]="{'green': state=='FOCUS', 'red': state=='READY'}"></div>
+        <div *ngFor="let item of shiftHistory" [ngStyle]="{'top': item.yCoord+'%', 'left': item.xCoord+'%'}" class="field-history green"></div>
+        <div *ngFor="let item of scanHistory" [ngStyle]="{'top': item.yCoord+'%', 'left': item.xCoord+'%'}" class="field-history red"></div>
     </div>
 </div>

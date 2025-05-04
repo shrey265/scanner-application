@@ -17,13 +17,26 @@
     width: 50px;
     height: 50px;
     border: 1px solid black;
+    // background-color: #fff; 
+    background: transparent;
+    z-index: 2;   
+}
+
+.field-history{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
     background-color: #fff;    
 }
 
 .green{
     background-color: green;
+    border: none;
 }
 
 .red{
     background-color: red;
+    border: none;
+    z-index: 1;
 }
