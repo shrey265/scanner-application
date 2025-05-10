@@ -1,0 +1,7 @@
+<div class="container-div">
+    <div class="slide" #canvas>
+        <div class="field" *ngIf="state=='IDLE'" [ngStyle]="{'top': finalCoords.y+'%', 'left': finalCoords.x+'%'}"></div>
+        <div *ngFor="let item of shiftHistory" [ngStyle]="{'top': item.ycoord+'%', 'left': item.xcoord+'%'}" class="field-history green"></div>
+        <div *ngFor="let item of scanHistory" [ngStyle]="{'top': item.ycoord+'%', 'left': item.xcoord+'%'}" class="field-history red"></div>
+    </div>
+</div>
